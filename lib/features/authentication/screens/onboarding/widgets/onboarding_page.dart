@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../utils/constants/images.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/texts.dart';
+import '../../../../../utils/helpers/device_helpers.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({
@@ -20,9 +21,8 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        right: USizes.defaultSpace,
-        left: USizes.defaultSpace,
+      padding:  EdgeInsets.only(
+        top: UDeviceHelper.getAppBarHeight()
       ),
       child: Column(
         children: [

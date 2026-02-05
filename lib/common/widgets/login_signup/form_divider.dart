@@ -1,39 +1,35 @@
-
 import 'package:flutter/material.dart';
-
 import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/images.dart';
-import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_function.dart';
 
-class USocialButton extends StatelessWidget {
-  const USocialButton({
-    super.key,
-  });
+class UFormDivider extends StatelessWidget {
+  const UFormDivider({super.key, required this.dark, required this.title});
+
+  final bool dark;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
+    final dark = UHelperFunctions.isDarkMode(context);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        /// Google
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: UColors.grey),
-              borderRadius: BorderRadius.circular(100)
+        Expanded(
+          child: Divider(
+            indent: 60,
+            endIndent: 5,
+            thickness: 0.5,
+            color: dark ? UColors.darkGrey : UColors.grey,
           ),
-          child: IconButton(onPressed: (){}, icon: Image.asset(UImages.googleIcon,height: USizes.iconMd,width: USizes.iconMd,)),
         ),
-        SizedBox(
-          width: USizes.spaceBtwItems,
-        ),
-        /// Facebook
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: UColors.grey),
-              borderRadius: BorderRadius.circular(100)
+        Text(title, style: Theme.of(context).textTheme.labelMedium),
+        Expanded(
+          child: Divider(
+            indent: 5,
+            endIndent: 60,
+            thickness: 0.5,
+            color: dark ? UColors.darkGrey : UColors.grey,
           ),
-          child: IconButton(onPressed: (){}, icon: Image.asset(UImages.facebookIcon,height: USizes.iconMd,width: USizes.iconMd,)),
-        )
+        ),
       ],
     );
   }

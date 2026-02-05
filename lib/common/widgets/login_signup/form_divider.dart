@@ -3,11 +3,9 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/helper_function.dart';
 
 class UFormDivider extends StatelessWidget {
-  const UFormDivider({super.key, required this.dark, required this.title});
+  const UFormDivider({super.key, required this.title});
 
-  final bool dark;
   final String title;
-
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);

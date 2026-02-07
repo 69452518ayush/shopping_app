@@ -21,6 +21,16 @@ static const String loginTitle = 'Shop Smarter';
   static const String signIn = 'Sign In';
   static const String createAccount = 'Create Account';
   static const String orSignInWith = 'or Sign In With';
+  // SignUP Screen
 
 
+  static const String signupTitle = 'Let Get You Registered';
+  static const String firstName = 'First Name';
+  static const String lastName = 'Last Name';
+  static const String phoneNumber = 'Phone Number';
+  static const String iAgreeTo = 'I agree to';
+  static const String privacyPolicy = 'Privacy Policy';
+  static const String and = 'and';
+  static const String termsofUse = 'Terms of use';
+  static const String orSignupWith = 'or Sign up With';
 }

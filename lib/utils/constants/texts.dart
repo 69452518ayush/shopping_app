@@ -21,6 +21,21 @@ static const String loginTitle = 'Shop Smarter';
   static const String signIn = 'Sign In';
   static const String createAccount = 'Create Account';
   static const String orSignInWith = 'or Sign In With';
+  // Forget Password Screen
+  static const String  forgetPasswordTitle = 'Forget Password';
+  static const String  forgetPasswordSubTitle = "No worries ! Enter your registered Email address, and we'll help you reset your password";
+  static const String submit = 'Submit';
+  //   Reset Password Screen
+  static const String resetPasswordTitle = 'Password Reset Email Sent';
+  static const String resetPasswordSubTitle = "We've sent a password reset link to your email.Please check your inbox and follow the instructions to reset your password";
+  static const String done = 'Done';
+
+// Verify Email Screen
+  static const String emailSentTitle ='Verify your email address!';
+  static const String emailSentSubTitle = "We’ve sent a verification link to your email. Please check your inbox and click the link to verify your account";
+  static const String uContinue = 'Continue';
+  static const String resendEmail = 'Resend Email';
+
   // SignUP Screen
 
 

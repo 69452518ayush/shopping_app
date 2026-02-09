@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/authentication/screens/foget_password/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -45,7 +46,7 @@ class ULoginForm extends StatelessWidget {
             ),
 
             /// Forget Password
-            TextButton(onPressed: () {}, child: Text(UTexts.forgetPassword)),
+            TextButton(onPressed: () => Get.to(() => ForgetPasswordScreen()), child: Text(UTexts.forgetPassword)),
           ],
         ),
         SizedBox(height: USizes.spaceBtwSections),

@@ -6,4 +6,7 @@ class UImages {
 
   static const String facebookIcon = 'assets/logo/facebook-icon.png.png';
   static const String googleIcon = 'assets/logo/google-icon.png.png';
+
+  static const String accountCreatedImage = 'assets/images/8ab8b5a0191991bb09 1.png';
+  static const String mailSentImage = 'assets/images/mailSentImage.png';
 }

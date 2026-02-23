@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/authentication/screens/foget_password/forget_password.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -40,26 +41,32 @@ class ULoginForm extends StatelessWidget {
           children: [
             Row(
               children: [
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Checkbox(value: true, onChanged: (value) {}),
+                Checkbox(value: true, onChanged: (value) {}),
                 Text(UTexts.rememberMe),
               ],
             ),
 
             /// Forget Password
-            TextButton(onPressed: () => Get.to(() => ForgetPasswordScreen()), child: Text(UTexts.forgetPassword)),
+            TextButton(
+              onPressed: () => Get.to(() => ForgetPasswordScreen()),
+              child: Text(UTexts.forgetPassword),
+            ),
           ],
         ),
         SizedBox(height: USizes.spaceBtwSections),
 
         /// Sign IN
-        UElevatedButton(onPressed: () {}, child: Text(UTexts.signIn)),
+        UElevatedButton(
+          onPressed: () => Get.to(() => NavigationMenu),
+          child: Text(UTexts.signIn),
+        ),
         SizedBox(height: USizes.spaceBtwItems / 2),
 
         /// Create Account
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
-            onPressed: () => Get.to(()=> SignupScreen()),
+            onPressed: () => Get.to(() => SignupScreen()),
             child: Text(UTexts.createAccount),
           ),
         ),

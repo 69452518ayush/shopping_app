@@ -6,8 +6,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: UPrimaryHeaderContainer(child: Container(
-
-    ),));
+    return Scaffold(body: UPrimaryHeaderContainer(child: Container()));
   }
 }

@@ -1,6 +1,7 @@
+import 'package:ecommerce/utils/constants/images.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../common/widgets/customs_shapes/circular_container.dart';
+import '../../../../../common/widgets/image_text/vartical_image_text.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/texts.dart';
@@ -10,46 +11,38 @@ class UHomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /// SectionHeading
-        Text(
-          UTexts.popularCategories,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineSmall!.apply(color: UColors.white),
-        ),
-        SizedBox(height: USizes.spaceBtwSections / 2),
-        SizedBox(
-          height: 80,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  /// Circular Image
-                  UCircularContainer(height: 56, width: 56,
-                  child: Image.asset(name),),
-
-                  /// Title
-                  SizedBox(
-                    width: 55,
-                    child: Text(
-                      "Sport Categories",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelMedium!.apply(color: UColors.white),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              );
-            },
+    return Padding(
+      padding: const EdgeInsets.only(left: USizes.spaceBtwSections),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// SectionHeading
+          Text(
+            UTexts.popularCategories,
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall!.apply(color: UColors.white),
           ),
-        ),
-      ],
+          SizedBox(height: USizes.spaceBtwSections),
+          /// Categories ListView
+          SizedBox(
+            height: 80,
+            child: ListView.separated(
+              separatorBuilder: (context, index) =>
+                  SizedBox(width: USizes.spaceBtwItems),
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return UVerticalImageText(
+                  title: 'Sports Categories',
+                  image: UImages.sportsIcon,
+                  textColor: UColors.white,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

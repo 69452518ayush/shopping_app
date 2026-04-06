@@ -30,7 +30,7 @@ class UHomeCategories extends StatelessWidget {
                 children: [
                   /// Circular Image
                   UCircularContainer(height: 56, width: 56,
-                  child: Image,),
+                  child: Image.asset(name),),
 
                   /// Title
                   SizedBox(

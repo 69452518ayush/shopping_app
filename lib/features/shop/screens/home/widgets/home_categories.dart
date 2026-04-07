@@ -24,6 +24,7 @@ class UHomeCategories extends StatelessWidget {
             ).textTheme.headlineSmall!.apply(color: UColors.white),
           ),
           SizedBox(height: USizes.spaceBtwSections),
+
           /// Categories ListView
           SizedBox(
             height: 80,

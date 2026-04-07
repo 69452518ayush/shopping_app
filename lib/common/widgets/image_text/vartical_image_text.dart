@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_function.dart';
 import '../customs_shapes/circular_container.dart';
 
 class UVerticalImageText extends StatelessWidget {
@@ -21,6 +22,7 @@ class UVerticalImageText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool dark = UHelperFunctions.isDarkMode(context);
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -29,9 +31,14 @@ class UVerticalImageText extends StatelessWidget {
           UCircularContainer(
             height: 56,
             width: 56,
-            backgroundColor: backgroundColor ?? UColors.white,
+            backgroundColor:
+                backgroundColor ?? (dark ? UColors.dark : UColors.light),
             padding: EdgeInsets.all(USizes.sm),
-            child: Image(image: AssetImage(image), fit: BoxFit.cover),
+            child: Image(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+              color: dark ? UColors.light : UColors.dark,
+            ),
           ),
           SizedBox(height: USizes.spaceBtwItems / 2),
 

@@ -1,4 +1,3 @@
-import 'package:ecommerce/common/widgets/appbar/appBar.dart';
 import 'package:ecommerce/features/authentication/controller/home/home_controller.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
@@ -6,14 +5,11 @@ import 'package:ecommerce/features/shop/screens/home/widgets/primary_header_cont
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/constants/texts.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
+import '../../../../common/products/product_carts/product_cart_vertical.dart';
+import '../../../../common/widgets/text/section_heading.dart';
 import '../../../../common/widgets/textfields/search_bar.dart';
-import '../../../../utils/constants/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,43 +18,56 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     return Scaffold(
-      body: Column(
-        children: [
-          /// Upper part
-          Stack(
-            children: [
-              UPrimaryHeaderContainer(
-                child: Column(
-                  children: [
-                    /// HomeAppBar
-                    UHomeAppBar(),
-                    SizedBox(height: USizes.spaceBtwSections),
-                    /// Home Categories
-                    UHomeCategories(),
-                  ],
-                ),
-              ),
-              /// SearchBar
-              USearchBar(),
-            ],
-          ),
-          SizedBox(height: USizes.defaultSpace),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            /// Upper part
+            Stack(
+              children: [
+                UPrimaryHeaderContainer(
+                  child: Column(
+                    children: [
+                      /// HomeAppBar
+                      UHomeAppBar(),
+                      SizedBox(height: USizes.spaceBtwSections),
 
-          /// lower part
-          /// Banner
-          Padding(
-            padding: const EdgeInsets.all(USizes.defaultSpace),
-            child: UPromoSlider(
-              banners: [
-                UImages.homeBanner1,
-                UImages.homeBanner2,
-                UImages.homeBanner3,
-                UImages.homeBanner4,
-                UImages.homeBanner5,
+                      /// Home Categories
+                      UHomeCategories(),
+                    ],
+                  ),
+                ),
+
+                /// SearchBar
+                USearchBar(),
               ],
             ),
-          ),
-        ],
+            SizedBox(height: USizes.defaultSpace),
+            /// lower part
+            /// Banner
+            Padding(
+              padding: const EdgeInsets.all(USizes.defaultSpace),
+              child: Column(
+                children: [
+                  UPromoSlider(
+                    banners: [
+                      UImages.homeBanner1,
+                      UImages.homeBanner2,
+                      UImages.homeBanner3,
+                      UImages.homeBanner4,
+                      UImages.homeBanner5,
+                    ],
+                  ),
+                  SizedBox(height: USizes.spaceBtwItems),
+                  /// Section Heading
+                  USectionHeading(title: 'Popular Products'),
+                  SizedBox(height: USizes.spaceBtwItems),
+                  /// Vertical Heading
+                  UProductCartVertical(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

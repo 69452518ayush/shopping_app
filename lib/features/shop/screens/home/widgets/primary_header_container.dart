@@ -5,15 +5,16 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/device_helpers.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {
-  const UPrimaryHeaderContainer({super.key, required this.child});
+  const UPrimaryHeaderContainer({super.key, required this.child, required this.height});
 
   final Widget child;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return URoundedEdges(
       child: Container(
-        height: 320,
+        height: height,
         color: UColors.primary,
         child: Stack(
           children: [

@@ -44,6 +44,7 @@ flutter:
     - assets/images/
     - assets/icons/categories/
     - assets/products/
+    - assets/brands/
 
 
    #-----------------[FONTS]---------------------------

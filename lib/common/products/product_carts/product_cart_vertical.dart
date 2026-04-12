@@ -1,5 +1,3 @@
-
-
 import 'package:ecommerce/common/widgets/customs_shapes/clipper/rounded_container.dart';
 import 'package:ecommerce/common/widgets/icons/circular_icon.dart';
 import 'package:ecommerce/common/widgets/images/rounded_images.dart';
@@ -10,6 +8,8 @@ import 'package:iconsax/iconsax.dart';
 import '../../../utils/constants/images.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../styles/shadow.dart';
+import '../../widgets/text/brand_title_text.dart';
+import '../../widgets/text/brand_title_with_verify_icon.dart';
 import '../../widgets/text/product_price_text.dart';
 import '../../widgets/text/product_title_text.dart';
 
@@ -84,23 +84,7 @@ class UProductCartVertical extends StatelessWidget {
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
                   /// Product Brand
-                  Row(
-                    children: [
-                      Text(
-                        "Bata",
-                        style: Theme.of(context).textTheme.labelMedium,
-                        textAlign: TextAlign.left,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: USizes.xs),
-                      Icon(
-                        Iconsax.verify5,
-                        color: UColors.primary,
-                        size: USizes.iconXs,
-                      ),
-                    ],
-                  ),
+                  UBrandTitleWithVerifyIcon(title: 'Bata'),
 
                   /// Product Price  & Add Button
                 ],

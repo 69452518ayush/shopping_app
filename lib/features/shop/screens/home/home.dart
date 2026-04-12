@@ -26,6 +26,7 @@ class HomeScreen extends StatelessWidget {
             Stack(
               children: [
                 UPrimaryHeaderContainer(
+                  height: USizes.homePrimaryHeaderHeight,
                   child: Column(
                     children: [
                       /// HomeAppBar

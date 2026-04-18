@@ -8,13 +8,13 @@ import '../images/rounded_images.dart';
 import '../text/brand_title_with_verify_icon.dart';
 
 class UBrandCard extends StatelessWidget {
-  const UBrandCard({super.key});
-
+  const UBrandCard({super.key,  this.showBorder = true});
+final bool  showBorder;
   @override
   Widget build(BuildContext context) {
     return URoundedContainer(
       width: 170.0,
-      showBorder: true,
+      showBorder: showBorder,
       padding: EdgeInsets.all(USizes.sm),
       backgroundColor: Colors.transparent,
       child: Row(

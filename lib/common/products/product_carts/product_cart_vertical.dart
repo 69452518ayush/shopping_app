@@ -29,16 +29,17 @@ class UProductCartVertical extends StatelessWidget {
           borderRadius: BorderRadius.circular(USizes.productImageRadius),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           /// Thumbnail, Favourite Button and Discount
           children: [
             URoundedContainer(
-              width: 180,
+              height: 180,
               padding: const EdgeInsets.all(USizes.md),
               backgroundColor: dark ? UColors.dark : UColors.light,
               child: Stack(
                 children: [
                   /// Thumbnail
-                  URoundedImage(imageUrl: UImages.productImage15),
+                  Center(child: URoundedImage(imageUrl: UImages.productImage15)),
 
                   /// Discount Tag
                   Positioned(

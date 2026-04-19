@@ -4,7 +4,7 @@ import '../../../../../common/widgets/appbar/appBar.dart';
 import '../../../../../common/widgets/textfields/search_bar.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../home/widgets/primary_header_container.dart';
+import '../../../../../common/widgets/customs_shapes/clipper/primary_header_container.dart';
 
 class UStorePrimaryHeader extends StatelessWidget {
   const UStorePrimaryHeader({super.key});

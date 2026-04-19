@@ -7,11 +7,13 @@ class USectionHeading extends StatelessWidget {
     required this.title,
     this.buttonTitle = 'View all',
     this.onPressed,
+    this.showActonButton = true,
   });
 
   final Color? textColor;
   final String title, buttonTitle;
   final void Function()? onPressed;
+  final bool showActonButton;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class USectionHeading extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        TextButton(onPressed: onPressed, child: Text(buttonTitle)),
+        if (showActonButton)
+          TextButton(onPressed: onPressed, child: Text(buttonTitle)),
       ],
     );
   }

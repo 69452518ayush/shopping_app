@@ -46,7 +46,7 @@ class StoreScreen extends StatelessWidget {
                               itemCount: 10,
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemBuilder: (context, index) => UBrandCard(),
+                              itemBuilder: (context, index) => SizedBox(width: USizes.brandCardWidth,child: UBrandCard()),
                             ),
                           ),
                         ],

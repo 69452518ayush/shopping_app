@@ -7,12 +7,12 @@ class UGridLayout extends StatelessWidget {
   const UGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisCount = 200,
+    this.mainAxisExtent = 200,
     required this.itemBuilder,
   });
 
   final int itemCount;
-  final double? mainAxisCount;
+  final double? mainAxisExtent;
   final Widget Function(BuildContext, int index) itemBuilder;
 
   @override

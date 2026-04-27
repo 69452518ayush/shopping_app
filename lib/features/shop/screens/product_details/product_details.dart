@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_thumbnail_and_slider.dart';
 
@@ -23,6 +24,7 @@ class ProductDetailsScreen extends StatelessWidget {
             UProductMetaData(),
 
             ///-------- Attributes--------
+            UProductAttributes(),
             ///---------Checkout Button
             ///--------------Description--------------
             ///--

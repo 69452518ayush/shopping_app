@@ -1,14 +1,15 @@
 import 'package:ecommerce/common/widgets/customs_shapes/clipper/rounded_container.dart';
 import 'package:ecommerce/common/widgets/icons/circular_icon.dart';
 import 'package:ecommerce/common/widgets/images/rounded_images.dart';
+import 'package:ecommerce/features/shop/screens/product_details/product_details.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../utils/constants/images.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../styles/shadow.dart';
-import '../../widgets/text/brand_title_text.dart';
 import '../../widgets/text/brand_title_with_verify_icon.dart';
 import '../../widgets/text/product_price_text.dart';
 import '../../widgets/text/product_title_text.dart';
@@ -20,7 +21,7 @@ class UProductCartVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(()=>ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: EdgeInsets.all(0.1),

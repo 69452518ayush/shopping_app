@@ -21,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(USizes.defaultSpace),
               child: Column(
                 children: [
+
                   /// User profile
                   UserProfileTile(),
 
@@ -31,14 +32,22 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   /// Setting Menu
-                  SettingMenuTile(title: 'My Addresses', subtitle: 'Set shopping delivery addresses', icon: Iconsax.safe_home,),
-                  SettingMenuTile(title: 'My Cart', subtitle: 'Add, remove products and move to checkout', icon: Iconsax.shopping_cart,),
-                  SettingMenuTile(title: 'My Orders', subtitle: 'In - progress and Completed Orders', icon: Iconsax.bag_tick,),
+                  SettingMenuTile(title: 'My Addresses',
+                    subtitle: 'Set shopping delivery addresses',
+                    icon: Iconsax.safe_home,),
+                  SettingMenuTile(title: 'My Cart',
+                    subtitle: 'Add, remove products and move to checkout',
+                    icon: Iconsax.shopping_cart,),
+                  SettingMenuTile(title: 'My Orders',
+                    subtitle: 'In - progress and Completed Orders',
+                    icon: Iconsax.bag_tick,),
                   SizedBox(height: USizes.spaceBtwSections,),
+
                   /// Logout
                   SizedBox(
                       width: double.infinity,
-                      child: OutlinedButton(onPressed: (){}, child: Text('Logout'))),
+                      child: OutlinedButton(
+                          onPressed: () {}, child: Text('Logout'))),
                   SizedBox(height: USizes.spaceBtwSections,),
                 ],
               ),

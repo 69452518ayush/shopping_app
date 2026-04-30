@@ -7,6 +7,8 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../common/widgets/chip/choice_chip.dart';
+
 class UProductAttributes extends StatelessWidget {
   const UProductAttributes({super.key});
 
@@ -63,9 +65,78 @@ class UProductAttributes extends StatelessWidget {
               ),
 
               /// Attributes Description
-              UProductTitleText(title: 'This is a product of iPhone11 with 512 GB storage',smallSize: true,maxLines: 4,)
+              UProductTitleText(
+                title: 'This is a product of iPhone11 with 512 GB storage',
+                smallSize: true,
+                maxLines: 4,
+              ),
             ],
           ),
+        ),
+        SizedBox(height: USizes.spaceBtwItems),
+
+        /// Attributes - colors
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            USectionHeading(title: 'Colors', showActonButton: false),
+            SizedBox(height: USizes.spaceBtwItems / 2),
+            Wrap(
+              spacing: USizes.sm,
+              children: [
+                UChoiceChip(
+                  text: 'Red',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+
+                UChoiceChip(
+                  text: 'Blue',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+
+                UChoiceChip(
+                  text: 'Orange',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+              ],
+            ),
+          ],
+        ),
+
+        /// Attributes - Sizes
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            USectionHeading(title: 'Sizes', showActonButton: false),
+            SizedBox(height: USizes.spaceBtwItems / 2),
+            Wrap(
+              spacing: USizes.sm,
+              children: [
+                UChoiceChip(
+                  text: 'small',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+
+                UChoiceChip(
+                  text: 'medium',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+
+                UChoiceChip(
+                  text:
+                      ''
+                      'large',
+                  selected: true,
+                  onSelected: (value) {},
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

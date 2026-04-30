@@ -40,7 +40,7 @@ class UTexts {
   // Forget Password Screen
   static const String forgetPasswordTitle = 'Forget Password';
   static const String forgetPasswordSubTitle =
-      "No worries ! Enter your registered Email address, and we'll help you reset your password";
+      "No worries ! Enter your registered Email adress, and we'll help you reset your password";
   static const String submit = 'Submit';
 
   //   Reset Password Screen
@@ -50,7 +50,7 @@ class UTexts {
   static const String done = 'Done';
 
   // Verify Email Screen
-  static const String verifyEmailTitle = 'Verify your email address!';
+  static const String verifyEmailTitle = 'Verify your email adress!';
   static const String verifyEmailSubTitle =
       "We’ve sent a verification link to your email. Please check your inbox and click the link to verify your account";
   static const String uContinue = 'Continue';

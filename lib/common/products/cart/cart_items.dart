@@ -13,9 +13,10 @@ class UCartItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: true,
       separatorBuilder: (context, index) =>
           SizedBox(height: USizes.spaceBtwSections),
-      itemCount: 10,
+      itemCount: 2,
       itemBuilder: (context, index) {
         return Column(
           children: [

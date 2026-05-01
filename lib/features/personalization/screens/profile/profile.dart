@@ -3,6 +3,7 @@ import 'package:ecommerce/features/personalization/screens/adress/address_screen
 import 'package:ecommerce/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:ecommerce/features/personalization/screens/profile/widgets/setting_menu_tile.dart';
 import 'package:ecommerce/features/personalization/screens/profile/widgets/user_profile.dart';
+import 'package:ecommerce/features/shop/screens/order/order.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                   SettingMenuTile(title: 'My Cart',onTap: (){},
                     subtitle: 'Add, remove products and move to checkout',
                     icon: Iconsax.shopping_cart,),
-                  SettingMenuTile(title: 'My Orders',onTap: (){},
+                  SettingMenuTile(title: 'My Orders',onTap: () => Get.to(()=> OrderScreen()),
                     subtitle: 'In - progress and Completed Orders',
                     icon: Iconsax.bag_tick,),
                   SizedBox(height: USizes.spaceBtwSections,),

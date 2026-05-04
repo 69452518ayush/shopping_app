@@ -7,13 +7,12 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: UAppBar(showBackArrow: true,title: Text('My Orders',style: Theme.of(context).textTheme.bodyLarge,),),
-      body: Column(
-        children: [
-          UOrdersList(),
-        ],
+    return Scaffold(
+      appBar: UAppBar(
+        showBackArrow: true,
+        title: Text('My Orders', style: Theme.of(context).textTheme.bodyLarge),
       ),
+      body: Column(children: [UOrdersList()]),
     );
   }
 }

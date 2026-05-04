@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/widgets/text/section_heading.dart';
+import 'package:ecommerce/features/shop/screens/brands/all_brands.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/store_primary_header.dart';
 
@@ -6,6 +7,7 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../common/widgets/brands/brand_card.dart';
@@ -35,7 +37,10 @@ class StoreScreen extends StatelessWidget {
                       SizedBox(height: USizes.spaceBtwItems),
                       Column(
                         children: [
-                          USectionHeading(title: "Brands", onPressed: () {}),
+                          USectionHeading(
+                            title: "Brands",
+                            onPressed: () => Get.to(() => BrandScreen()),
+                          ),
 
                           /// Brands Cart
                           SizedBox(
@@ -46,7 +51,10 @@ class StoreScreen extends StatelessWidget {
                               itemCount: 10,
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemBuilder: (context, index) => SizedBox(width: USizes.brandCardWidth,child: UBrandCard()),
+                              itemBuilder: (context, index) => SizedBox(
+                                width: USizes.brandCardWidth,
+                                child: UBrandCard(),
+                              ),
                             ),
                           ),
                         ],

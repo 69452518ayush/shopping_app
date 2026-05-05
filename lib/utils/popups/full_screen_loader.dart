@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../common/widgets/loader/animation_loader.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_function.dart';
 

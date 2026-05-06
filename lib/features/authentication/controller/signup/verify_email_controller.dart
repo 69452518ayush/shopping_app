@@ -31,6 +31,7 @@ class VerifyEmailController extends GetxController {
       USnackBarHelpers.errorSnackBar(title: 'Error', message: e.toString());
     }
   }
+
   /// Timer to automatically redirect on Email Verification
   void setTimerForAutoRedirect() {
     Timer.periodic(Duration(seconds: 1), (timer) {
@@ -48,5 +49,23 @@ class VerifyEmailController extends GetxController {
         );
       }
     });
+  }
+/// Manually Check if email is verified
+  Future<void> checkEmailVerificationStatus() async {
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null && currentUser.emailVerified) {
+        Get.off(
+          () => SuccessScreen(
+            title: UTexts.accountCreatedTitle,
+            subTitle: UTexts.accountCreatedSubTitle,
+            image: UImages.successfulPaymentIcon,
+            onTap: () => AuthenticationRepository.instance.screenRedirect(),
+          ),
+        );
+      }
+    } catch (e) {
+
+    }
   }
 }

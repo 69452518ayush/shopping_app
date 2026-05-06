@@ -1,5 +1,7 @@
 import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:ecommerce/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:ecommerce/utils/exceptions/firebase_exceptions.dart';
 import 'package:ecommerce/utils/exceptions/format_exceptions.dart';
@@ -22,10 +24,25 @@ class AuthenticationRepository extends GetxController {
   }
 
   void screenRedirect() {
-    localStorage.writeIfNull('isFirstTime', true);
-    localStorage.read('isFirstTime') == true
-        ? Get.to(() => LoginScreen())
-        : Get.to(() => OnboardingScreen());
+    final user = _auth.currentUser;
+    if(user != null){
+      // Check if user is verified
+      if(user != null){
+        // If verified go to navigation Menu
+        if(user.emailVerified){
+          Get.offAll(() => NavigationMenu());
+        } else {
+          Get.offAll(() => VerifyEmailScreen(email: user.email,));
+        }
+      }
+    } else {
+      // Write isFirstTime If null
+      localStorage.writeIfNull('isFirstTime', true);
+      localStorage.read('isFirstTime') == true
+          ? Get.to(() => LoginScreen())
+          : Get.to(() => OnboardingScreen());
+    }
+
   }
 
   /// Authentication with email and password

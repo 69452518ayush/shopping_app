@@ -1,3 +1,4 @@
+import 'package:ecommerce/bindings/bindings.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
@@ -15,11 +16,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: UAppTheme.lightTheme,
       darkTheme: UAppTheme.darkTheme,
+      initialBinding: UBindings(),
       home: Scaffold(
         backgroundColor: UColors.primary,
-        body: Center(
-          child: CircularProgressIndicator(color: UColors.white,),
-        ),
+        body: Center(child: CircularProgressIndicator(color: UColors.white)),
       ),
     );
   }

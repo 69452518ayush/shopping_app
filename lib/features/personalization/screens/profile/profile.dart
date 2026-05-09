@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../data/repository/authentication_repository.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -24,7 +26,6 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(USizes.defaultSpace),
               child: Column(
                 children: [
-
                   /// User profile
                   UserProfileTile(),
 
@@ -35,23 +36,35 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   /// Setting Menu
-                  SettingMenuTile(title: 'My Addresses',onTap: () => Get.to(()=> AddressScreen()),
+                  SettingMenuTile(
+                    title: 'My Addresses',
+                    onTap: () => Get.to(() => AddressScreen()),
                     subtitle: 'Set shopping delivery addresses',
-                    icon: Iconsax.safe_home,),
-                  SettingMenuTile(title: 'My Cart',onTap: (){},
+                    icon: Iconsax.safe_home,
+                  ),
+                  SettingMenuTile(
+                    title: 'My Cart',
+                    onTap: () {},
                     subtitle: 'Add, remove products and move to checkout',
-                    icon: Iconsax.shopping_cart,),
-                  SettingMenuTile(title: 'My Orders',onTap: () => Get.to(()=> OrderScreen()),
+                    icon: Iconsax.shopping_cart,
+                  ),
+                  SettingMenuTile(
+                    title: 'My Orders',
+                    onTap: () => Get.to(() => OrderScreen()),
                     subtitle: 'In - progress and Completed Orders',
-                    icon: Iconsax.bag_tick,),
-                  SizedBox(height: USizes.spaceBtwSections,),
+                    icon: Iconsax.bag_tick,
+                  ),
+                  SizedBox(height: USizes.spaceBtwSections),
 
                   /// Logout
                   SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                          onPressed: () {}, child: Text('Logout'))),
-                  SizedBox(height: USizes.spaceBtwSections,),
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: AuthenticationRepository.instance.logout,
+                      child: Text('Logout'),
+                    ),
+                  ),
+                  SizedBox(height: USizes.spaceBtwSections),
                 ],
               ),
             ),

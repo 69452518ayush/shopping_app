@@ -25,14 +25,14 @@ class AuthenticationRepository extends GetxController {
 
   void screenRedirect() {
     final user = _auth.currentUser;
-    if(user != null){
+    if (user != null) {
       // Check if user is verified
-      if(user != null){
+      if (user != null) {
         // If verified go to navigation Menu
-        if(user.emailVerified){
+        if (user.emailVerified) {
           Get.offAll(() => NavigationMenu());
         } else {
-          Get.offAll(() => VerifyEmailScreen(email: user.email,));
+          Get.offAll(() => VerifyEmailScreen(email: user.email));
         }
       }
     } else {
@@ -42,7 +42,6 @@ class AuthenticationRepository extends GetxController {
           ? Get.to(() => LoginScreen())
           : Get.to(() => OnboardingScreen());
     }
-
   }
 
   /// Authentication with email and password
@@ -63,6 +62,31 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+
+  /// [Email Authentication] - Sign In
+  Future<UserCredential> loginWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw ' Something went wrong. Please try again later';
+    }
+  }
+
   /// [EmailVerification] - Send Mail
 
   Future<void> sendEmailVerification() async {
@@ -84,8 +108,8 @@ class AuthenticationRepository extends GetxController {
   /// [Logout] - Logout the user
   Future<void> logout() async {
     try {
-      await  FirebaseAuth.instance.signOut();
-      Get.offAll(()=> LoginScreen());
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

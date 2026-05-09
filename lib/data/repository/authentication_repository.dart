@@ -11,6 +11,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -50,6 +51,34 @@ class AuthenticationRepository extends GetxController {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw ' Something went wrong. Please try again later';
+    }
+  }
+  /// [Email Authentication] - send email
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      // Show popup to select google account
+     final GoogleSignInAccount? userAccount  = await  GoogleSignIn().signIn();
+     // Get the auth details from the request
+     final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+     // create credentials
+     final OAuthCredential credential = GoogleAuthProvider.credential(
+       idToken:googleAuth?.idToken ,
+       accessToken: googleAuth?.accessToken
+     );
+     // Sign In using google credentials
+     UserCredential userCredential = await  _auth.signInWithCredential(credential);
+     return userCredential;
+
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/data/repository/authentication_repository.dart';
 import 'package:ecommerce/features/authentication/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,28 @@ class UserRepository extends GetxController {
       throw UPlatformException(e.code).message;
     } catch (e) {
       throw ' Something went wrong. Please try again later';
+    }
+  }
+  ///[Read] - Function to fetch user details based on current user
+  Future<UserModel> fetchUserDetails() async {
+    try {
+      final documentSnapshots = await _db.collection(UKeys.userCollection).doc(AuthenticationRepository.instance.currentUser!.uid).get();
+      if(documentSnapshots.exists){
+        UserModel user = UserModel.fromSnapshot(documentSnapshots);
+        return user;
+      }
+      return UserModel.empty();
+
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch(e){
+      throw ' Something went wrong . Please try again later';
     }
   }
 }

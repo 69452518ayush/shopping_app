@@ -44,4 +44,8 @@ class UHelperFunctions {
   static bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }
+  static String getGreetingMessage(){
+    final hour = DateTime.now().hour;
+
+  }
 }

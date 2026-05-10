@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/styles/padding.dart';
 import 'package:ecommerce/common/widgets/button/elevated_button.dart';
+import 'package:ecommerce/features/authentication/controller/forgetpassword/forget_password_controller.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -10,10 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({super.key});
-
+  const ResetPasswordScreen({super.key, required this.email});
+final String email;
   @override
   Widget build(BuildContext context) {
+    final controller = ForgetPasswordController.instance;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -43,7 +45,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               SizedBox(height: USizes.spaceBtwItems),
               Text(
-                'ayushpandey.pratapgarh@gmail.com',
+                email,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: USizes.spaceBtwItems),
@@ -55,13 +57,13 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwSections),
 
               /// Done
-              UElevatedButton(onPressed: () {}, child: Text(UTexts.done)),
+              UElevatedButton(onPressed: () => Get.offAll(() => LoginScreen()), child: Text(UTexts.done)),
 
               /// Resend Email
               SizedBox(
                 width: UDeviceHelper.getScreenWidth(context),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed:  controller.resendPasswordResetEmail,
                   child: Text(UTexts.resendEmail),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:ecommerce/features/personalization/controller/user_controller.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class UHomeAppBar extends StatelessWidget {
         children: [
           /// -------------------------------TITLE--------------------------------
           Text(
-            UTexts.homeAppBarTitle,
+            UHelperFunctions.getGreetingMessage(),
             style: Theme.of(
               context,
             ).textTheme.labelMedium!.apply(color: UColors.grey),

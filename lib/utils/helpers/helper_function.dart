@@ -42,10 +42,24 @@ class UHelperFunctions {
   }
 
   static bool isDarkMode(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark;
+    return Theme
+        .of(context)
+        .brightness == Brightness.dark;
   }
-  static String getGreetingMessage(){
-    final hour = DateTime.now().hour;
 
+  static String getGreetingMessage() {
+    final hour = DateTime
+        .now()
+        .hour;
+    if (hour >= 5 && hour < 12) {
+      return 'Good Morning';
+    } else if (hour >= 12 && hour < 16) {
+      return 'Good Afternoon';
+    } else if (hour >= 16 && hour < 19) {
+      return 'Good Evening';
+    } else  {
+      return 'Good Evening';
+    }
   }
+
 }

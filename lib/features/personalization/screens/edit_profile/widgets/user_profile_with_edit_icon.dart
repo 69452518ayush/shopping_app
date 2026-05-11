@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/personalization/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -9,6 +10,7 @@ class UserProfileWithEditIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Stack(
       children: [
         // User Profile logo

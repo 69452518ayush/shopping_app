@@ -1,6 +1,11 @@
+import 'package:ecommerce/data/repository/authentication_repository.dart';
 import 'package:ecommerce/data/repository/user/user_repository.dart';
 import 'package:ecommerce/features/authentication/models/user_model.dart';
+import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
+import 'package:ecommerce/features/personalization/screens/edit_profile/widgets/re_authenticate_user_form.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/network_manager.dart';
+import 'package:ecommerce/utils/popups/full_screen_loader.dart';
 import 'package:ecommerce/utils/popups/snackbar_helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +19,11 @@ class UserController extends GetxController {
   final _userRepository = Get.put(UserRepository());
   Rx<UserModel> user = UserModel.empty().obs;
   RxBool profileLoading = false.obs;
-
+  ///  Re_Authenticate Form Variables
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final reAuthFormKey = GlobalKey<FormState>();
+  RxBool isPasswordVisible = false.obs;
   @override
   void onInit() {
     fetchUserDetails();
@@ -59,14 +68,14 @@ class UserController extends GetxController {
       profileLoading.value = false;
     }
   }
-
+  /// [Popup] - Popup To delete Account Confirmation
   void deleteAccountWarningPopup() {
     Get.defaultDialog(
       contentPadding: EdgeInsets.all(USizes.md),
       title: 'Delete Account',
       middleText: 'Are you want to delete account permanent ?',
       confirm: ElevatedButton(
-        onPressed: () {},
+        onPressed: ()=> deleteUserAccount(),
         style: ElevatedButton.styleFrom(backgroundColor: Colors.red,side: BorderSide(color: Colors.red)),
         child: Padding(padding: EdgeInsets.symmetric(horizontal: USizes.lg)),
       ),
@@ -75,5 +84,62 @@ class UserController extends GetxController {
         child: Text('Cancel'),
       ),
     );
+  }
+  /// Delete Account
+  Future<void> deleteUserAccount() async {
+    try{
+      // Start loading
+      UFullScreenLoader.openLoadingDialog('Processing...');
+      // Re-Authenticate
+      final authRepository = AuthenticationRepository.instance;
+      final provider = authRepository.currentUser!.providerData.map((e) => e.providerId).first;
+      // If google Provider
+      if(provider == 'google.com'){
+        await authRepository.signInWithGoogle();
+        await authRepository.deleteAccount();
+        UFullScreenLoader.stopLoading();
+        Get.offAll(() => LoginScreen());
+
+
+        // If Email And Password Provider
+      } else if(provider=='password'){
+        UFullScreenLoader.stopLoading();
+        Get.to(() => ReAuthenticateUserForm());
+      }
+    } catch(e){
+      UFullScreenLoader.stopLoading();
+      USnackBarHelpers.errorSnackBar(title: 'Error',message: e.toString());
+
+    }
+  }
+
+  /// ReAuthenticate User With Email And Password
+  Future<void> reAuthenticateUser() async {
+    try{
+      // Start Loading
+      UFullScreenLoader.openLoadingDialog('Processing...');
+      // Check Internet Connectivity
+      bool isConnected = await NetworkManager.instance.isConnected();
+      if(!isConnected){
+        UFullScreenLoader.stopLoading();
+        return;
+      }
+      // Form Validation
+      if(reAuthFormKey.currentState!.validate()){
+        UFullScreenLoader.stopLoading();
+        return;
+      }
+      // Re Authenticate User with email and password
+      await  AuthenticationRepository.instance.reAuthenticateUserWithEmailAndPassword(email.text.trim(), password.text.trim());
+      // Delete Account
+       await AuthenticationRepository.instance.deleteAccount();
+       UFullScreenLoader.stopLoading();
+       Get.offAll(() => LoginScreen());
+    } catch(e){
+      // Stop Loading
+      UFullScreenLoader.stopLoading();
+      USnackBarHelpers.errorSnackBar(title: 'Failed',message: e.toString());
+
+    }
   }
 }

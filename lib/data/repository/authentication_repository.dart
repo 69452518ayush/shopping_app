@@ -1,3 +1,4 @@
+import 'package:ecommerce/data/repository/user/user_repository.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
@@ -152,6 +153,23 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+  ///
+  Future<void> reAuthenticateUserWithEmailAndPassword(String email, String password) async {
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+       await currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw ' Something went wrong. Please try again later';
+    }
+  }
 
   /// [Logout] - Logout the user
   Future<void> logout() async {
@@ -170,4 +188,23 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+  /// [Delete] - Delete the User Account
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(currentUser!.uid);
+      await _auth.currentUser?.delete();
+
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw ' Something went wrong. Please try again later';
+    }
+  }
+
 }

@@ -18,7 +18,8 @@ class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final localStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
-  User? get  currentUser => _auth.currentUser;
+
+  User? get currentUser => _auth.currentUser;
 
   @override
   void onReady() {
@@ -65,22 +66,24 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+
   /// [Email Authentication] - send email
   Future<UserCredential> signInWithGoogle() async {
     try {
       // Show popup to select google account
-     final GoogleSignInAccount? userAccount  = await  GoogleSignIn().signIn();
-     // Get the auth details from the request
-     final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
-     // create credentials
-     final OAuthCredential credential = GoogleAuthProvider.credential(
-       idToken:googleAuth?.idToken ,
-       accessToken: googleAuth?.accessToken
-     );
-     // Sign In using google credentials
-     UserCredential userCredential = await  _auth.signInWithCredential(credential);
-     return userCredential;
-
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+      // Get the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await userAccount
+          ?.authentication;
+      // create credentials
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleAuth?.idToken,
+          accessToken: googleAuth?.accessToken
+      );
+      // Sign In using google credentials
+      UserCredential userCredential = await _auth.signInWithCredential(
+          credential);
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -95,10 +98,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [Email Authentication] - Sign In
-  Future<UserCredential> loginWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<UserCredential> loginWithEmailAndPassword(String email,
+      String password,) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -153,11 +154,14 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+
   ///
-  Future<void> reAuthenticateUserWithEmailAndPassword(String email, String password) async {
+  Future<void> reAuthenticateUserWithEmailAndPassword(String email,
+      String password) async {
     try {
-      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
-       await currentUser!.reauthenticateWithCredential(credential);
+      AuthCredential credential = EmailAuthProvider.credential(
+          email: email, password: password);
+      await currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -188,12 +192,12 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
+
   /// [Delete] - Delete the User Account
   Future<void> deleteAccount() async {
     try {
       await UserRepository.instance.removeUserRecord(currentUser!.uid);
       await _auth.currentUser?.delete();
-
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

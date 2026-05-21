@@ -16,44 +16,56 @@ class ReAuthenticateUserForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;
-    return   Scaffold(
-      appBar: UAppBar(showBackArrow: true,title: Text('Re-Authenticate User'),),
+    return Scaffold(
+      appBar: UAppBar(
+        showBackArrow: true, title: Text('Re-Authenticate User'),),
       body: SingleChildScrollView(
         child: Padding(
-            padding:UPadding.screenPadding,
-        child: Form(
-          key: controller.reAuthFormKey,
-            child: Column(
-          children: [
-            /// Email
-            Obx(
-                () => TextFormField(
-                controller: controller.email,
-                validator:  UValidator.validateEmail,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Iconsax.direct_right),
-                  labelText: UTexts.email
-                ),
-              ),
-            ),
-            SizedBox(height: USizes.spaceBtwSections,),
-            /// Password
-            Obx(
-              () => TextFormField(
-                controller: controller.password,
-                obscureText: controller.isPasswordVisible.value,
-                validator: (value) =>  UValidator.validateEmptyText('Password', value),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Iconsax.direct_right),
-                    labelText: UTexts.password,
-                  suffixIcon: IconButton(onPressed: () => controller.isPasswordVisible.toggle(), icon: Icon(controller.isPasswordVisible.value ? Iconsax.eye :Iconsax.eye_slash))
-                ),
-              ),
-            ),
-            /// Verify  Button
-            UElevatedButton(onPressed:  controller.reAuthenticateUser, child: Text('Verified'))
-          ],
-        )),),
+          padding: UPadding.screenPadding,
+          child: Form(
+              key: controller.reAuthFormKey,
+              child: Column(
+                children: [
+
+                  /// Email
+                  Obx(
+                        () =>
+                        TextFormField(
+                          controller: controller.email,
+                          validator: UValidator.validateEmail,
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Iconsax.direct_right),
+                              labelText: UTexts.email
+                          ),
+                        ),
+                  ),
+                  SizedBox(height: USizes.spaceBtwSections,),
+
+                  /// Password
+                  Obx(
+                        () =>
+                        TextFormField(
+                          controller: controller.password,
+                          obscureText: controller.isPasswordVisible.value,
+                          validator: (value) =>
+                              UValidator.validateEmptyText('Password', value),
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Iconsax.direct_right),
+                              labelText: UTexts.password,
+                              suffixIcon: IconButton(onPressed: () =>
+                                  controller.isPasswordVisible.toggle(),
+                                  icon: Icon(controller.isPasswordVisible.value
+                                      ? Iconsax.eye
+                                      : Iconsax.eye_slash))
+                          ),
+                        ),
+                  ),
+
+                  /// Verify  Button
+                  UElevatedButton(onPressed: controller.reAuthenticateUser,
+                      child: Text('Verified'))
+                ],
+              )),),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/personalization/controller/user_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -7,6 +8,7 @@ import '../../../../../common/widgets/images/user_profile_logo.dart';
 
 class UserProfileWithEditIcon extends StatelessWidget {
   const UserProfileWithEditIcon({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class UserProfileWithEditIcon extends StatelessWidget {
           bottom: 0,
           right: 0,
           left: 0,
-          child: Center(child: UCircularIcon(icon: Iconsax.edit)),
+          child: Center(child: UCircularIcon(icon: Iconsax.edit,onPressed: controller.updateUserProfilePicture,)),
         ),
       ],
     );

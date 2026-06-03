@@ -1,9 +1,6 @@
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserModel{
+class UserModel {
   // keep final which do not want to update
   final String id;
   String firstName;
@@ -22,7 +19,7 @@ class UserModel{
     required this.email,
     required this.phoneNumber,
     required this.profilePicture,
-    this.publicId = ''
+    this.publicId = '',
   });
 
   /// Function to get the full name
@@ -31,39 +28,47 @@ class UserModel{
   /// Static function to split full name into first name and last name
   static List<String> nameParts(fullName) => fullName.split(" ");
 
-
   /// static function to create an empty user model
-  static UserModel empty() => UserModel(id: "", firstName: "", lastName: "", username: "", email: "", phoneNumber: "", profilePicture: "");
+  static UserModel empty() => UserModel(
+    id: "",
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    phoneNumber: "",
+    profilePicture: "",
+  );
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'firstName' : firstName,
-      'lastName' : lastName,
-      'username' : username,
-      'email' : email,
-      'phoneNumber' : phoneNumber,
-      'profilePicture' : profilePicture,
-      'publicId' : publicId
+      'firstName': firstName,
+      'lastName': lastName,
+      'username': username,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'profilePicture': profilePicture,
+      'publicId': publicId,
     };
   }
 
-  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document){
-    if(document.data() != null){
+  factory UserModel.fromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> document,
+  ) {
+    if (document.data() != null) {
       final data = document.data()!;
       return UserModel(
-          id: document.id,
-          firstName: data['firstName'] ?? '',
-          lastName: data['lastName'] ?? '',
-          username: data['username'] ?? '',
-          email: data['email'] ?? '',
-          phoneNumber: data['phoneNumber'] ?? '',
-          profilePicture: data['profilePicture'] ?? '',
-          publicId: data['publicId']
+        id: document.id,
+        firstName: data['firstName'] ?? '',
+        lastName: data['lastName'] ?? '',
+        username: data['username'] ?? '',
+        email: data['email'] ?? '',
+        phoneNumber: data['phoneNumber'] ?? '',
+        profilePicture: data['profilePicture'] ?? '',
+        publicId: data['publicId'],
       );
-    }else{
+    } else {
       return UserModel.empty();
     }
   }
-
 }

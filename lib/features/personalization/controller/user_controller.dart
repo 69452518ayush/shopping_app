@@ -25,6 +25,7 @@ class UserController extends GetxController {
   final _userRepository = Get.put(UserRepository());
   Rx<UserModel> user = UserModel.empty().obs;
   RxBool profileLoading = false.obs;
+  RxBool isProfileUploading = false.obs;
 
   ///  Re_Authenticate Form Variables
   final email = TextEditingController();
@@ -182,6 +183,8 @@ class UserController extends GetxController {
 
   Future<void> updateUserProfilePicture() async {
     try {
+      // start loading
+      isProfileUploading.value = true;
       // Pick Image from Gallery
       XFile? image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
@@ -217,6 +220,9 @@ class UserController extends GetxController {
       }
     } catch (e) {
       USnackBarHelpers.errorSnackBar(title: 'Failed', message: e.toString());
+    } finally{
+      isProfileUploading.value = false;
+
     }
   }
 

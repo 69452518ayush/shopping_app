@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:ecommerce/data/repository/authentication_repository.dart';
+import 'package:ecommerce/data/services/cloudinary_services.dart';
 import 'package:ecommerce/features/authentication/models/user_model.dart';
 import 'package:ecommerce/utils/constants/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,7 @@ class UserRepository extends GetxController {
 
   /// Variable
   final _db = FirebaseFirestore.instance;
+  final _cloudinaryServices = Get.put(CloudinaryServices());
 
   /// Function to store User data
   Future<void> savedUserRecord(UserModel user) async {
@@ -108,7 +110,7 @@ class UserRepository extends GetxController {
   /// [UploadImage] - Function to upload user profile picture
   Future<dio.Response> uploadImage(File image) async {
     try {
-      String api = UApiUrls.uploadApi(UKeys.cloudName);
+      /*String api = UApiUrls.uploadApi(UKeys.cloudName);
       dio.FormData formData = dio.FormData.fromMap({
         'upload_preset': UKeys.uploadPreset,
         'folder': UKeys.profileFolder,
@@ -117,7 +119,12 @@ class UserRepository extends GetxController {
           filename: image.path.split('/').last,
         ),
       });
-      dio.Response response = await dio.Dio().post(api, data: formData);
+      dio.Response response = await dio.Dio().post(api, data: formData);*/
+
+      dio.Response response = await _cloudinaryServices.uploadImage(
+        image,
+        UKeys.profileFolder,
+      );
       return response;
     } catch (e) {
       throw 'Failed to upload profile picture. Please try again';
@@ -126,7 +133,7 @@ class UserRepository extends GetxController {
 
   Future<dio.Response> deleteProfilePicture(String publicId) async {
     try {
-      String api = UApiUrls.deleteApi(UKeys.cloudName);
+      /*String api = UApiUrls.deleteApi(UKeys.cloudName);
       int timeStamp = (DateTime.now().millisecondsSinceEpoch / 1000).round();
       String signatureBase =
           'public_id=$publicId&timestamp=$timeStamp${UKeys.apiSecret}';
@@ -137,7 +144,10 @@ class UserRepository extends GetxController {
         'timestamp': timeStamp,
         'signature': signature,
       });
-      dio.Response response = await dio.Dio().post(api, data: formData);
+      dio.Response response = await dio.Dio().post(api, data: formData);*/
+      dio.Response response = await _cloudinaryServices.deleteProfilePicture(
+        publicId,
+      );
       return response;
     } catch (e) {
       throw 'Something went wrong.Please try again';

@@ -1,6 +1,8 @@
 class UKeys{
   UKeys._();
   static const String  userCollection = 'users';
+  static const String  categoryCollection = 'categories';
+  static const String  categoryFolder = 'folder';
   static const String  rememberMeEmail = 'Remember_email';
   static const String  rememberMePassword = 'Remember_password';
   static const String  cloudName = 'dweejzj0b';

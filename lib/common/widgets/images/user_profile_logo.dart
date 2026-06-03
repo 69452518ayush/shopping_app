@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/widgets/images/circular_image.dart';
+import 'package:ecommerce/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:ecommerce/features/personalization/controller/user_controller.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,12 @@ class USerProfileLogo extends StatelessWidget {
     final controller = UserController.instance;
 
     return Obx(() {
+
       bool isProfileAvailable = controller.user.value.profilePicture.isNotEmpty;
+      // Loading State
+      if(controller.isProfileUploading.value){
+        return UShimmerEffect(width: 120.0, height: 120.0,radius: 120.0,);
+      }
       return UCircularImage(
         image: isProfileAvailable
             ? controller.user.value.profilePicture

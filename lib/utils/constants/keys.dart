@@ -2,7 +2,9 @@ class UKeys{
   UKeys._();
   static const String  userCollection = 'users';
   static const String  categoryCollection = 'categories';
-  static const String  categoryFolder = 'folder';
+  static const String  categoryFolder = 'Category Pictures';
+  static const String  bannersCollection = 'Banners';
+  static const String  bannersFolder = 'Banners Images';
   static const String  rememberMeEmail = 'Remember_email';
   static const String  rememberMePassword = 'Remember_password';
   static const String  cloudName = 'dweejzj0b';

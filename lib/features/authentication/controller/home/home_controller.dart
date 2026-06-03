@@ -7,11 +7,8 @@ class HomeController extends GetxController{
 
 
   /// variables
-  final carouselController = CarouselSliderController();
-  RxInt currentIndex = 0.obs;
+
 
   /// On Carousel Page Changed
-  void onPageChanged(int index){
-    currentIndex.value = index;
-  }
+
 }

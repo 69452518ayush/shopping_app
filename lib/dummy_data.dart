@@ -2,9 +2,11 @@ import 'package:e_commerce/features/shop/models/promo_code_model.dart';
 import 'package:e_commerce/routes/routes.dart';
 import 'package:e_commerce/utils/constants/enums.dart';
 import 'package:e_commerce/utils/constants/texts.dart';
+import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 
-import 'features/personalization/modals/category_models.dart';
+import 'features/shop/models/banners_models.dart';
+import 'features/shop/models/category_models.dart';
 import 'features/shop/models/banners_model.dart';
 import 'features/shop/models/brand_category_model.dart';
 import 'features/shop/models/brand_model.dart';
@@ -12,7 +14,6 @@ import 'features/shop/models/category_model.dart';
 import 'features/shop/models/product_attribute_model.dart';
 import 'features/shop/models/product_category_model.dart';
 import 'features/shop/models/product_model.dart';
-import 'features/shop/models/product_variation_model.dart';
 import 'utils/constants/images.dart';
 
 class UDummyData {

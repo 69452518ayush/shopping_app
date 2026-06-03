@@ -20,7 +20,7 @@ class UShimmerEffect extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: color ?? (dark ? UColors.darkerGrey : UColors.white),
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(radius)
       ),
     ),
     );

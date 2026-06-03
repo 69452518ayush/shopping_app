@@ -53,18 +53,21 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   UPromoSlider(
-                    banners: [
+                    /*banners: [
                       UImages.homeBanner1,
                       UImages.homeBanner2,
                       UImages.homeBanner3,
                       UImages.homeBanner4,
                       UImages.homeBanner5,
-                    ],
+                    ],*/
                   ),
                   SizedBox(height: USizes.spaceBtwItems),
 
                   /// Section Heading
-                  USectionHeading(title: 'Popular Products',onPressed: () => Get.to(() => AllProductsScreen()),),
+                  USectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () => Get.to(() => AllProductsScreen()),
+                  ),
                   SizedBox(height: USizes.spaceBtwItems),
 
                   /// Grid Layout And ProductCard

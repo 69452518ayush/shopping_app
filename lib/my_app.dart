@@ -1,5 +1,6 @@
 import 'package:ecommerce/bindings/bindings.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:ecommerce/routes/app_routes.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: UAppTheme.lightTheme,
       darkTheme: UAppTheme.darkTheme,
+      getPages: UAppRoutes.screen,
       initialBinding: UBindings(),
       home: Scaffold(
         backgroundColor: UColors.primary,

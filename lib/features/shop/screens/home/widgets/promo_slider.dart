@@ -37,11 +37,6 @@ class UPromoSlider extends StatelessWidget {
                   ),
                 )
                 .toList(),
-
-            /*Image(image: AssetImage(UImages.homeBanner2)),
-              Image(image: AssetImage(UImages.homeBanner3)),
-              Image(image: AssetImage(UImages.homeBanner4)),
-              Image(image: AssetImage(UImages.homeBanner5)),*/
             options: CarouselOptions(
               viewportFraction: 1.0,
               onPageChanged: (index, reason) =>

@@ -18,7 +18,7 @@ import '../../../utils/exceptions/platform_exceptions.dart';
 class CategoryRepository extends GetxController {
   static CategoryRepository get instance => Get.find();
 
-  /// Variable
+  /// [Variable]
   final _db = FirebaseFirestore.instance;
   final _cloudinaryServices = Get.put(CloudinaryServices());
 

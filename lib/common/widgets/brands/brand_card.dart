@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/enums.dart';
@@ -8,10 +9,16 @@ import '../images/rounded_images.dart';
 import '../text/brand_title_with_verify_icon.dart';
 
 class UBrandCard extends StatelessWidget {
-  const UBrandCard({super.key, this.showBorder = true,  this.onTap});
+  const UBrandCard({
+    super.key,
+    this.showBorder = true,
+    this.onTap,
+    required this.brand,
+  });
 
   final bool showBorder;
   final VoidCallback? onTap;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,10 @@ class UBrandCard extends StatelessWidget {
         child: Row(
           children: [
             /// Brand Image
-            URoundedImage(imageUrl: UImages.bataLogo),
+            Flexible(child: URoundedImage(imageUrl: brand.image,
+            isNetworkImage: true,
+            backgroundColor: Colors.transparent,
+            )),
             SizedBox(width: USizes.spaceBtwItems / 2),
 
             Column(
@@ -32,13 +42,13 @@ class UBrandCard extends StatelessWidget {
               children: [
                 /// Brand Name & verify Icon
                 UBrandTitleWithVerifyIcon(
-                  title: 'Bata',
+                  title: brand.name,
                   brandTextSizes: TextSizes.large,
                 ),
 
                 /// Text
                 Text(
-                  '172',
+                  '${brand.productsCount} products',
                   style: Theme.of(context).textTheme.labelMedium,
                   overflow: TextOverflow.ellipsis,
                 ),

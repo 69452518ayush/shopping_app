@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/widgets/brands/brand_card.dart';
+import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class UBrandShowcase extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Brand with product count
-          UBrandCard(showBorder: false),
+          UBrandCard(showBorder: false, brand: BrandModel.empty(),),
           Row(
             children: images
                 .map((image) => buildBrandImage(dark, image))

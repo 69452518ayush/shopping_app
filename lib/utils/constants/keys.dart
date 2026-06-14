@@ -2,6 +2,7 @@ class UKeys{
   UKeys._();
   static const String  userCollection = 'users';
   static const String  categoryCollection = 'categories';
+  static const String  productCollection = 'Product';
   static const String  brandCollection = 'Brands';
   static const String  categoryFolder = 'Category Pictures';
   static const String  bannersCollection = 'Banners';
@@ -16,4 +17,5 @@ class UKeys{
 
 
   static  const String brandFolder = 'Brands Images';
+  static  const String productFolder = 'Product Images';
 }

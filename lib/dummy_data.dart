@@ -14,6 +14,8 @@ import 'features/shop/models/category_model.dart';
 import 'features/shop/models/product_attribute_model.dart';
 import 'features/shop/models/product_category_model.dart';
 import 'features/shop/models/product_model.dart';
+import 'features/shop/models/product_variation_model.dart';
+import 'features/shop/models/promo_code_model.dart';
 import 'utils/constants/images.dart';
 
 class UDummyData {

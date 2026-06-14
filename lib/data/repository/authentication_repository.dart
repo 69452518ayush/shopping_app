@@ -1,6 +1,7 @@
 import 'package:ecommerce/data/repository/banners/banner_repository.dart';
 import 'package:ecommerce/data/repository/brand/brand_repositories.dart';
 import 'package:ecommerce/data/repository/category/category_repository.dart';
+import 'package:ecommerce/data/repository/product/product_repository.dart';
 import 'package:ecommerce/data/repository/user/user_repository.dart';
 import 'package:ecommerce/dummy_data.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
@@ -32,9 +33,10 @@ class AuthenticationRepository extends GetxController {
     FlutterNativeSplash.remove();
     // Redirect to the right to screen
     screenRedirect();
-    Get.put(BrandRepositories().uploadBrands(UDummyData.brands));
+    //Get.put(BrandRepositories().uploadBrands(UDummyData.brands));
     //Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
     //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
+    Get.put(ProductRepository()).uploadProducts(UDummyData.products);
   }
 
   void screenRedirect() {

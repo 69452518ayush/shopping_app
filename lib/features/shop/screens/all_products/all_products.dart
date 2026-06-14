@@ -41,7 +41,7 @@ class USortableProduct extends StatelessWidget {
           onChanged: (value){},),
         SizedBox(height: USizes.spaceBtwSections,),
         /// Products
-        UGridLayout(itemCount: 10,itemBuilder: (context, index) => UProductCartVertical(),)
+        UGridLayout(itemCount: 10,itemBuilder: (context, index) => UProductCartVertical(product: ,),)
       ],
     );
   }

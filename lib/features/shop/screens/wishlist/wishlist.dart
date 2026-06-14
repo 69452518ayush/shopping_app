@@ -2,6 +2,7 @@ import 'package:ecommerce/common/products/product_carts/product_cart_vertical.da
 import 'package:ecommerce/common/widgets/appbar/appBar.dart';
 import 'package:ecommerce/common/widgets/icons/circular_icon.dart';
 import 'package:ecommerce/common/widgets/layout/grid_layout.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/navigation_menu.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class WishlistScreen extends StatelessWidget {
           padding: const EdgeInsets.all(USizes.defaultSpace),
           child: UGridLayout(
             itemCount: 10,
-            itemBuilder: (context, index) => UProductCartVertical(),
+            itemBuilder: (context, index) => UProductCartVertical(product: ProductModel.empty(),),
           ),
         ),
       ),

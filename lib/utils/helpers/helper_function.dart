@@ -39,6 +39,8 @@ class UHelperFunctions {
       return Colors.teal;
     } else if (value == 'Indigo') {
       return Colors.indigo;
+    } else if (value == 'Silver') {
+      return Colors.grey;
     } else {
       return null;
     }

@@ -1,4 +1,6 @@
 import 'package:ecommerce/features/authentication/controller/home/home_controller.dart';
+import 'package:ecommerce/features/shop/controller/product/product_controller.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
@@ -19,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
+    final productController = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -71,11 +74,22 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: USizes.spaceBtwItems),
 
                   /// Grid Layout And ProductCard
-                  UGridLayout(
-                    itemCount: 6,
-                    itemBuilder: (BuildContext, int index) {
-                      return UProductCartVertical();
-                    },
+                  Obx(
+                    (){
+                     if(productController.isLoading.value){
+                       return const Center(child: CircularProgressIndicator(),);
+                     }
+                     if(productController.featuredProducts.isEmpty){
+                       return Center(child: Text('Products not Found!'));
+                     }
+                     return  UGridLayout(
+                       itemCount: productController.featuredProducts.length,
+                       itemBuilder: (BuildContext, int index) {
+                         ProductModel product = productController.featuredProducts[index];
+                         return UProductCartVertical(product: ProductModel.empty(),);
+                       },
+                     );
+                    }
                   ),
                 ],
               ),

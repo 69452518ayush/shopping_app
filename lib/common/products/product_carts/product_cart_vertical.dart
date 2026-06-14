@@ -1,6 +1,8 @@
 import 'package:ecommerce/common/widgets/customs_shapes/clipper/rounded_container.dart';
 import 'package:ecommerce/common/widgets/icons/circular_icon.dart';
 import 'package:ecommerce/common/widgets/images/rounded_images.dart';
+import 'package:ecommerce/features/shop/controller/product/product_controller.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/product_details/product_details.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
@@ -15,13 +17,16 @@ import '../../widgets/text/product_price_text.dart';
 import '../../widgets/text/product_title_text.dart';
 
 class UProductCartVertical extends StatelessWidget {
-  const UProductCartVertical({super.key});
+  const UProductCartVertical({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
     final dark = UHelperFunctions.isDarkMode(context);
+    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     return GestureDetector(
-      onTap: () => Get.to(()=>ProductDetailsScreen()),
+      onTap: () => Get.to(()=>ProductDetailsScreen(product: product,)),
       child: Container(
         width: 180,
         padding: EdgeInsets.all(0.1),
@@ -40,9 +45,10 @@ class UProductCartVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   /// Thumbnail
-                  Center(child: URoundedImage(imageUrl: UImages.productImage15)),
+                  Center(child: URoundedImage(imageUrl: product.thumbnail,isNetworkImage: true,)),
 
                   /// Discount Tag
+                  if(salePercentage !=  null)
                   Positioned(
                     top: 12.0,
                     child: URoundedContainer(
@@ -53,7 +59,7 @@ class UProductCartVertical extends StatelessWidget {
                         vertical: USizes.xs,
                       ),
                       child: Text(
-                        '20%',
+                        '$salePercentage',
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge!.apply(color: UColors.black),
@@ -82,11 +88,11 @@ class UProductCartVertical extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ///ProductTitle
-                  UProductTitleText(title: 'Blue Bata Shoes', smallSize: true),
+                  UProductTitleText(title: product.title, smallSize: true),
                   SizedBox(height: USizes.spaceBtwItems / 2),
 
                   /// Product Brand
-                  UBrandTitleWithVerifyIcon(title: 'Bata'),
+                  UBrandTitleWithVerifyIcon(title: product.brand!.name),
 
                   /// Product Price  & Add Button
                 ],
@@ -100,7 +106,7 @@ class UProductCartVertical extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: USizes.sm),
-                  child: UProductPriceText(price: '65'),
+                  child: UProductPriceText(price: controller.getProductPrice(product)),
                 ),
                 Container(
                   width: USizes.iconLg * 1.2,

@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -27,7 +28,7 @@ class USortableProduct extends StatelessWidget {
         /// Products
         UGridLayout(
           itemCount: 10,
-          itemBuilder: (context, index) => UProductCartVertical(),
+          itemBuilder: (context, index) => UProductCartVertical(product: ProductModel.empty(),),
         ),
       ],
     );

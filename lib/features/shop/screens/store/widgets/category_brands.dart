@@ -5,6 +5,7 @@ import 'package:ecommerce/features/shop/models/category_models.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/cloud_helpers_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../common/widgets/brands/brand_showcase.dart';
 import '../../../../../utils/constants/images.dart';
@@ -29,13 +30,26 @@ class CategoryBrands extends StatelessWidget {
         );
        final widget =  UCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
        if(widget != null) return  widget;
+        
+       
+       final brands = snapshot.data!;
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: brands.length,
+          itemBuilder: (context , index){
+            final brand = brands[index];
+            return FutureBuilder(future: controller.getBrandProducts(brand.id,limit: 3),
+                builder: (context ,snapshot){
+              /// Handle loader , No Records, Error
+                  final widget = UCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
+                  if(widget != null) return widget;
+                  /// Products found
+                  final products = snapshot.data!;
+              return UBrandShowcase(images: products.map((product) => product.thumbnail ).toList(), brand: brand);
+                });
 
-        return UBrandShowcase(
-          images: [
-            UImages.productImage47,
-            UImages.productImage43,
-            UImages.productImage7,
-          ],
+          },
         );
       },
 

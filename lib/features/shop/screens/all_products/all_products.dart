@@ -1,48 +1,45 @@
-import 'package:ecommerce/common/products/product_carts/product_cart_vertical.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/common/styles/padding.dart';
 import 'package:ecommerce/common/widgets/appbar/appBar.dart';
-import 'package:ecommerce/common/widgets/layout/grid_layout.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/features/shop/controller/product/all_product_controller.dart';
+import 'package:ecommerce/utils/helpers/cloud_helpers_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:get/get.dart';
+
+import '../../../../common/widgets/products/sortable_products.dart';
+import '../../models/product_model.dart';
 
 class AllProductsScreen extends StatelessWidget {
-  const AllProductsScreen({super.key});
+  const AllProductsScreen({super.key,  this.futureMethod, this.query, required this.title});
 
+  final Future<List<ProductModel>>? futureMethod;
+  final Query? query;
+  final String title;
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: UAppBar(showBackArrow: true,title: Text('Popular Products',style: Theme.of(context).textTheme.headlineMedium,),),
-      body: SingleChildScrollView(
-        child: Padding(padding: UPadding.screenPadding,
-        child: USortableProduct(),
+    final controller = Get.put(AllProductController());
+    return Scaffold(
+      appBar: UAppBar(
+        showBackArrow: true,
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
-
       ),
-    );
-  }
-}
-
-class USortableProduct extends StatelessWidget {
-  const USortableProduct({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /// Filter Field
-        DropdownButtonFormField(
-          decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort)),
-          items: ['Name','Lower Price','Higher Price','Sale','Newest'].map((filter){
-            return DropdownMenuItem(child: Text(filter), value: filter);
-          }).toList(),
-          onChanged: (value){},),
-        SizedBox(height: USizes.spaceBtwSections,),
-        /// Products
-        UGridLayout(itemCount: 10,itemBuilder: (context, index) => UProductCartVertical(product: ,),)
-      ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: UPadding.screenPadding,
+          child: FutureBuilder(
+            future: futureMethod ?? controller.fetchProductByQuery(query),
+              builder: (context, snapshot){
+              final widget = UCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
+              if(widget != null) return  widget;
+              final products = snapshot.data;
+              return USortableProduct();
+            },
+          ),
+        ),
+      ),
     );
   }
 }

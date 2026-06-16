@@ -69,28 +69,34 @@ class HomeScreen extends StatelessWidget {
                   /// Section Heading
                   USectionHeading(
                     title: 'Popular Products',
-                    onPressed: () => Get.to(() => AllProductsScreen()),
+                    onPressed: () => Get.to(
+                      () => AllProductsScreen(
+                        title: 'Popular Products',
+                        futureMethod: productController.getAllFeaturedProduct(),
+                      ),
+                    ),
                   ),
                   SizedBox(height: USizes.spaceBtwItems),
 
                   /// Grid Layout And ProductCard
-                  Obx(
-                    (){
-                     if(productController.isLoading.value){
-                       return const Center(child: CircularProgressIndicator(),);
-                     }
-                     if(productController.featuredProducts.isEmpty){
-                       return Center(child: Text('Products not Found!'));
-                     }
-                     return  UGridLayout(
-                       itemCount: productController.featuredProducts.length,
-                       itemBuilder: (BuildContext, int index) {
-                         ProductModel product = productController.featuredProducts[index];
-                         return UProductCartVertical(product: ProductModel.empty(),);
-                       },
-                     );
+                  Obx(() {
+                    if (productController.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
                     }
-                  ),
+                    if (productController.featuredProducts.isEmpty) {
+                      return Center(child: Text('Products not Found!'));
+                    }
+                    return UGridLayout(
+                      itemCount: productController.featuredProducts.length,
+                      itemBuilder: (BuildContext, int index) {
+                        ProductModel product =
+                            productController.featuredProducts[index];
+                        return UProductCartVertical(
+                          product: ProductModel.empty(),
+                        );
+                      },
+                    );
+                  }),
                 ],
               ),
             ),

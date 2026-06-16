@@ -6,6 +6,8 @@ import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/widgets/products/sortable_products.dart';
+
 class BrandProductsScreen extends StatelessWidget {
   const BrandProductsScreen({super.key});
 

@@ -3,8 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../utils/constants/enums.dart';
 import '../../../utils/helpers/helper_function.dart';
-import '../../../utils/helpers/helper_functions.dart';
-import '../../personalization/models/address_model.dart';
 import 'cart_item_model.dart';
 
 class OrderModel{

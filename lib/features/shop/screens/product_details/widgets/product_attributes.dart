@@ -9,7 +9,6 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -24,67 +23,82 @@ class UProductAttributes extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
     final controller = Get.put(VariationController());
+
     return Obx(
-        () =>  Column(
+      () => Column(
         children: [
           /// Selected Attributes Pricing & Description
-          if(controller.selectedVariation.value.id.isNotEmpty)
-          URoundedContainer(
-            padding: EdgeInsets.all(USizes.md),
-            backgroundColor: dark ? UColors.darkerGrey : UColors.grey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// Title , Price & Stock
-                Row(
-                  children: [
-                    /// [Text] variation Heading
-                    USectionHeading(title: 'Variation', showActonButton: false),
-                    SizedBox(width: USizes.spaceBtwItems),
-                    Column(
-                      children: [
-                        /// Price , Sale Price, Stock, Actual Price
-                        Row(
-                          children: [
-                            /// Actual Price
-                            UProductTitleText(title: 'Price', smallSize: true),
-                            if(controller.selectedVariation.value.salePrice > 0)
-                            Text(
-                              '${UTexts.currency}${controller.selectedVariation.value.price.toString()}',
-                              style: Theme.of(context).textTheme.titleSmall!
-                                  .apply(decoration: TextDecoration.lineThrough),
-                            ),
-                            SizedBox(width: USizes.spaceBtwItems),
+          if (controller.selectedVariation.value.id.isNotEmpty)
+            URoundedContainer(
+              padding: EdgeInsets.all(USizes.md),
+              backgroundColor: dark ? UColors.darkerGrey : UColors.grey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// Title , Price & Stock
+                  Row(
+                    children: [
+                      /// [Text] variation Heading
+                      USectionHeading(
+                        title: 'Variation',
+                        showActonButton: false,
+                      ),
+                      SizedBox(width: USizes.spaceBtwItems),
+                      Column(
+                        children: [
+                          /// Price , Sale Price, Stock, Actual Price
+                          Row(
+                            children: [
+                              /// Actual Price
+                              UProductTitleText(
+                                title: 'Price',
+                                smallSize: true,
+                              ),
+                              if (controller.selectedVariation.value.salePrice >
+                                  0)
+                                Text(
+                                  '${UTexts.currency}${controller.selectedVariation.value.price.toString()}',
+                                  style: Theme.of(context).textTheme.titleSmall!
+                                      .apply(
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                ),
+                              SizedBox(width: USizes.spaceBtwItems),
 
-                            /// Sale Price
-                            UProductPriceText(price: controller.getVariationPrice()),
-                          ],
-                        ),
+                              /// Sale Price
+                              UProductPriceText(
+                                price: controller.getVariationPrice(),
+                              ),
+                            ],
+                          ),
 
-                        /// Stock Status
-                        Row(
-                          children: [
-                            UProductTitleText(title: 'Stock', smallSize: true),
-                            Text(
-                              controller.variationStockStatus.value,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          /// Stock Status
+                          Row(
+                            children: [
+                              UProductTitleText(
+                                title: 'Stock',
+                                smallSize: true,
+                              ),
+                              Text(
+                                controller.variationStockStatus.value,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
 
-                /// Attributes Description
-                UProductTitleText(
-                  title: controller.selectedVariation.value.description ?? '',
-                  smallSize: true,
-                  maxLines: 4,
-                ),
-              ],
+                  /// Attributes Description
+                  UProductTitleText(
+                    title: controller.selectedVariation.value.description ?? '',
+                    smallSize: true,
+                    maxLines: 4,
+                  ),
+                ],
+              ),
             ),
-          ),
           SizedBox(height: USizes.spaceBtwItems),
 
           /// Attributes - colors
@@ -100,24 +114,30 @@ class UProductAttributes extends StatelessWidget {
                   SizedBox(height: USizes.spaceBtwItems / 2),
                   Wrap(
                     spacing: USizes.sm,
-                    children: attribute.values!.map((attribute) {
+                    children: attribute.values!.map((attributeValue) {
                       bool isSelected =
                           controller.selectedAttributes[attribute.name] ==
                           attributeValue;
                       bool available = controller
                           .getAttributesAvailabilityInVariation(
                             product.productVariations!,
-                            attribute.Name!,
+                            attribute.name!,
                           )
                           .contains(attributeValue);
                       return UChoiceChip(
                         text: attributeValue,
                         selected: true,
-                        onSelected: available ? (selected) {
-                          if(available && selected){
-                            controller.onAttributeSelected(product, attribute.name, attributeValue);
-                          }
-                        } : null,
+                        onSelected: available
+                            ? (selected) {
+                                if (available && selected) {
+                                  controller.onAttributeSelected(
+                                    product,
+                                    attribute.name,
+                                    attributeValue,
+                                  );
+                                }
+                              }
+                            : null,
                       );
                     }).toList(),
                   ),

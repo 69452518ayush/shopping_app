@@ -35,6 +35,20 @@ class ProductController extends GetxController{
     }
   }
 
+  /// Function to get all featured products
+  Future<List<ProductModel>> getAllFeaturedProduct() async {
+    try{
+
+      // fetch feature products
+      List<ProductModel>  featuredProducts    = await _repository.fetchAllFeaturedProducts();
+      return featuredProducts;
+    }catch(e){
+      USnackBarHelpers.errorSnackBar(title: 'Failed',message: e.toString() );
+      return [];
+    }
+
+  }
+
   /// Calculate Sale price Percentage
   String? calculateSalePercentage(double originalPrice, double? salePrice){
     if(salePrice==null || salePrice <= 0.0) return null;

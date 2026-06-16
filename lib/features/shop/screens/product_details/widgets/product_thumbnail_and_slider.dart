@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce/common/widgets/products/favourite/favourite_icon.dart';
 import 'package:ecommerce/features/shop/controller/product/image_controller.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
@@ -86,7 +87,7 @@ class UProductThumbnailAndSlider extends StatelessWidget {
           /// [AppBar] - Back arrow and Favourite Button
           UAppBar(
             showBackArrow: true,
-            action: [UCircularIcon(icon: Iconsax.heart5, color: Colors.red)],
+            action: [UFavouriteIcon(productId: '',)],
           ),
         ],
       ),

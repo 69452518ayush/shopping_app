@@ -1,3 +1,4 @@
+import 'package:ecommerce/common/widgets/products/favourite/favourite_icon.dart';
 import 'package:ecommerce/common/widgets/text/brand_title_with_verify_icon.dart';
 import 'package:ecommerce/common/widgets/text/product_price_text.dart';
 import 'package:ecommerce/common/widgets/text/product_title_text.dart';
@@ -64,7 +65,7 @@ class UProductCartHorizontal extends StatelessWidget {
                 Positioned(
                   right: 0,
                   top: 0,
-                  child: UCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                  child: UFavouriteIcon(productId: '',),
                 ),
               ],
             ),

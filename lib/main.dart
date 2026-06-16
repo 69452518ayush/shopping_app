@@ -13,6 +13,7 @@ Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   /// Get Storage  Initialize
    await GetStorage.init();
+   await GetStorage.init('userId');
 
   /// Flutter Native Splash
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

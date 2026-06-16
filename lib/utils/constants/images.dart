@@ -7,16 +7,15 @@ class UImages {
   static const String onboarding3Animation = 'assets/animations/delivery.json';
   static const String loadingAnimation = 'assets/animations/loading.json';
 
-
   static const String facebookIcon = 'assets/logo/facebook-icon.png.png';
   static const String googleIcon = 'assets/logo/google-icon.png.png';
   static const String profileIcon = 'assets/logo/profile.png';
+
   //static const String googleIcon = 'assets/logo/google-icon.png.png';
 
   static const String accountCreatedImage =
       'assets/images/accountCreatedImage.png';
   static const String mailSentImage = 'assets/images/mailSentImage.png';
-
 
   // categories icons
   static const String bagsIcon =

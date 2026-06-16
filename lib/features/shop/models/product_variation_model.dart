@@ -46,7 +46,7 @@ class ProductVariationModel {
       description: data['description'] ?? '',
       image: data['image'],
       price: double.parse((data['price'] ?? 0.0).toString()),
-     // prices: double.parse((data['price'] ?? 0.0).toString()),
+      // prices: double.parse((data['price'] ?? 0.0).toString()),
       salePrice: double.parse((data['salePrice'] ?? 0.0).toString()),
       stock: data['stock'] ?? '',
       sku: data['sku'] ?? '',

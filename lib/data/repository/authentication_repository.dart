@@ -1,9 +1,4 @@
-import 'package:ecommerce/data/repository/banners/banner_repository.dart';
-import 'package:ecommerce/data/repository/brand/brand_repositories.dart';
-import 'package:ecommerce/data/repository/category/category_repository.dart';
-import 'package:ecommerce/data/repository/product/product_repository.dart';
 import 'package:ecommerce/data/repository/user/user_repository.dart';
-import 'package:ecommerce/dummy_data.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/login/login.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
@@ -23,6 +18,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final localStorage = GetStorage();
+  final storage = GetStorage('userId');
   final _auth = FirebaseAuth.instance;
 
   User? get currentUser => _auth.currentUser;
@@ -38,11 +34,10 @@ class AuthenticationRepository extends GetxController {
     //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
     //Get.put(ProductRepository()).uploadProducts(UDummyData.products);
     //Get.put(CategoryRepository()).uploadBrandCategory(UDummyData.brandCategory);
-   // Get.put(CategoryRepository()).uploadProductCategory(UDummyData.productCategory);
-
+    // Get.put(CategoryRepository()).uploadProductCategory(UDummyData.productCategory);
   }
 
-  void screenRedirect() {
+  void screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
       // Check if user is verified
@@ -50,6 +45,8 @@ class AuthenticationRepository extends GetxController {
         // If verified go to navigation Menu
         if (user.emailVerified) {
           Get.offAll(() => NavigationMenu());
+          // initialize user specific box
+          await GetStorage.init(user.uid);
         } else {
           Get.offAll(() => VerifyEmailScreen(email: user.email));
         }
@@ -88,16 +85,17 @@ class AuthenticationRepository extends GetxController {
       // Show popup to select google account
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
       // Get the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await userAccount
-          ?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
       // create credentials
       final OAuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleAuth?.idToken,
-          accessToken: googleAuth?.accessToken
+        idToken: googleAuth?.idToken,
+        accessToken: googleAuth?.accessToken,
       );
       // Sign In using google credentials
       UserCredential userCredential = await _auth.signInWithCredential(
-          credential);
+        credential,
+      );
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
@@ -113,8 +111,10 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [Email Authentication] - Sign In
-  Future<UserCredential> loginWithEmailAndPassword(String email,
-      String password,) async {
+  Future<UserCredential> loginWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -152,7 +152,6 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-
   /// [ForgetPassword] -Send Mail To Reset Password
   Future<void> sendPasswordResetEmail(String email) async {
     try {
@@ -171,11 +170,15 @@ class AuthenticationRepository extends GetxController {
   }
 
   ///
-  Future<void> reAuthenticateUserWithEmailAndPassword(String email,
-      String password) async {
+  Future<void> reAuthenticateUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     try {
       AuthCredential credential = EmailAuthProvider.credential(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       await currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
@@ -214,7 +217,7 @@ class AuthenticationRepository extends GetxController {
       await UserRepository.instance.removeUserRecord(currentUser!.uid);
       // Remove profile picture from Cloudinary
       String publicId = UserController.instance.user.value.publicId;
-      if(publicId.isNotEmpty){
+      if (publicId.isNotEmpty) {
         UserRepository.instance.deleteProfilePicture(publicId);
       }
       await _auth.currentUser?.delete();
@@ -230,5 +233,4 @@ class AuthenticationRepository extends GetxController {
       throw ' Something went wrong. Please try again later';
     }
   }
-
 }

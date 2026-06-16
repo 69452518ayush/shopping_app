@@ -36,7 +36,10 @@ class AuthenticationRepository extends GetxController {
     //Get.put(BrandRepositories().uploadBrands(UDummyData.brands));
     //Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
     //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
-    Get.put(ProductRepository()).uploadProducts(UDummyData.products);
+    //Get.put(ProductRepository()).uploadProducts(UDummyData.products);
+    //Get.put(CategoryRepository()).uploadBrandCategory(UDummyData.brandCategory);
+   // Get.put(CategoryRepository()).uploadProductCategory(UDummyData.productCategory);
+
   }
 
   void screenRedirect() {

@@ -4,6 +4,7 @@ import 'package:ecommerce/features/shop/controller/brand/brand_controller.dart';
 import 'package:ecommerce/features/shop/controller/category/category_controller.dart';
 import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:ecommerce/features/shop/screens/brands/all_brands.dart';
+import 'package:ecommerce/features/shop/screens/brands/brand_products.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/store_primary_header.dart';
 
@@ -43,7 +44,7 @@ class StoreScreen extends StatelessWidget {
                         children: [
                           USectionHeading(
                             title: "Brands",
-                            onPressed: () => Get.to(() => BrandScreen()),
+                            onPressed: () => Get.to(() => BrandScreen(title: '', brand: brandController. ,)),
                           ),
 
                           /// Brands Cards
@@ -70,7 +71,7 @@ class StoreScreen extends StatelessWidget {
                                       brandController.featureBrands[index];
                                   return SizedBox(
                                     width: USizes.brandCardWidth,
-                                    child: UBrandCard(brand: brand),
+                                    child: UBrandCard(brand: brand, onTap: () => Get.to(() => BrandProductsScreen(title: brand.name, brand: brand)),),
                                   );
                                 },
                               );
@@ -91,7 +92,7 @@ class StoreScreen extends StatelessWidget {
           },
           body: TabBarView(
             children: controller.featuredCategories
-                .map((category) => UCategoryTab())
+                .map((category) => UCategoryTab(category: category,))
                 .toList(),
           ),
         ),

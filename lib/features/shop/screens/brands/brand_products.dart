@@ -1,27 +1,44 @@
 import 'package:ecommerce/common/styles/padding.dart';
 import 'package:ecommerce/common/widgets/appbar/appBar.dart';
 import 'package:ecommerce/common/widgets/brands/brand_card.dart';
+import 'package:ecommerce/common/widgets/shimmer/vertical_product_shimmer.dart';
+import 'package:ecommerce/features/shop/controller/brand/brand_controller.dart';
 import 'package:ecommerce/features/shop/models/brand_model.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/cloud_helpers_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/products/sortable_products.dart';
 
 class BrandProductsScreen extends StatelessWidget {
-  const BrandProductsScreen({super.key});
-
+  const BrandProductsScreen({super.key, required this.title, required this.brand});
+final String title;
+final BrandModel brand;
   @override
   Widget build(BuildContext context) {
+    final controller = BrandController.instance;
     return Scaffold(
-      appBar: UAppBar(showBackArrow: true,title: Text('Bata',style: Theme.of(context).textTheme.headlineSmall,),),
+      appBar: UAppBar(showBackArrow: true,title: Text(title,style: Theme.of(context).textTheme.headlineSmall,),),
       body: SingleChildScrollView(
         child: Padding(padding: UPadding.screenPadding,
         child: Column(
           children: [
-            UBrandCard(brand: BrandModel.empty(),),
+            UBrandCard(brand: brand),
             SizedBox(height: USizes.spaceBtwSections,),
-            USortableProduct(),
+            // Brand Products
+            FutureBuilder(
+                future: controller.getBrandProducts(brand.id),
+                builder: (context, snapshot){
+                  /// Handle Loading , Error And Empty States
+                  const loader = UVerticalProductShimmer();
+                  Widget? widget = UCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot,loader: loader);
+                  /// Dota Found
+                  List<ProductModel> products = snapshot.data!;
+                  return USortableProduct( products: products,);
+                },
+            ),
           ],
         ),
         ),

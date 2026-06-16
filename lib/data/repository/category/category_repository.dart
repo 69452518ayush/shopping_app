@@ -3,6 +3,7 @@ import 'package:dio/dio.dart' as dio;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/data/services/cloudinary_services.dart';
+import 'package:ecommerce/features/shop/models/brand_category_model.dart';
 import 'package:ecommerce/features/shop/models/category_models.dart';
 import 'package:ecommerce/utils/constants/keys.dart';
 import 'package:ecommerce/utils/helpers/helper_function.dart';
@@ -21,6 +22,48 @@ class CategoryRepository extends GetxController {
   /// [Variable]
   final _db = FirebaseFirestore.instance;
   final _cloudinaryServices = Get.put(CloudinaryServices());
+
+  /// [Upload] - Function to upload list of brand categories
+  Future<void> uploadBrandCategory(List<BrandCategoryModel> brandCategories) async {
+     try {
+       for(final brandCategory in brandCategories){
+         await _db.collection(UKeys.brandCategoryCollection).doc().set(brandCategory.toJson());
+
+       }
+
+     }
+     on FirebaseException catch(e) {
+       throw UFirebaseException(e.code).message;
+     } on FormatException catch(_) {
+       throw UFormatException();
+     }on PlatformException catch(e){
+       throw UPlatformException(e.code).message;
+     } catch (e){
+       throw ' Something went wrong. Please try again';
+
+     }
+  }
+
+
+  Future<void> uploadProductCategory(List<BrandCategoryModel> productCategories) async {
+    try {
+      for(final productCategory in productCategories){
+        await _db.collection(UKeys.productCategoryCollection).doc().set(productCategory.toJson());
+
+      }
+
+    }
+    on FirebaseException catch(e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch(_) {
+      throw UFormatException();
+    }on PlatformException catch(e){
+      throw UPlatformException(e.code).message;
+    } catch (e){
+      throw ' Something went wrong. Please try again';
+
+    }
+  }
 
   ///[Upload Category ]  - Function to upload list of categories
   Future<void> uploadCategories(List<CategoryModel> categories) async {

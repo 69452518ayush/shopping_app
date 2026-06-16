@@ -11,8 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BrandScreen extends StatelessWidget {
-  const BrandScreen({super.key});
-
+  const BrandScreen({super.key, required this.title, required this.brand});
+final String title;
+final BrandModel brand;
   @override
   Widget build(BuildContext context) {
     final controller = BrandController.instance;
@@ -46,7 +47,8 @@ class BrandScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     BrandModel brand = controller.allBrands[index];
                     return UBrandCard(
-                      onTap: () => Get.to(() => BrandProductsScreen()),
+                      onTap: () =>
+                          Get.to(() => BrandProductsScreen(title: brand.name, brand: brand,)),
                       brand: brand,
                     );
                   },

@@ -21,7 +21,8 @@ class FavouriteController extends GetxController{
   }
   /// Load to add Or Remove Product from wishlist
   Future<void> initFavourites() async {
-      String encodedFavourites = await _storage.read('favourites');
+      String encodedFavourites =  _storage.read('favourites');
+      if(encodedFavourites == null) return ;
       Map<String, dynamic> storedFavourites = jsonDecode(encodedFavourites) as Map<String ,dynamic>;
       favourites.assignAll(storedFavourites.map((key , value) => MapEntry(key, value as bool)));
   }

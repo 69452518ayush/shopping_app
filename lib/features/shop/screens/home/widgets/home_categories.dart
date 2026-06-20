@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/widgets/shimmer/category_shimmer.dart';
 import 'package:ecommerce/features/shop/controller/category/category_controller.dart';
+import 'package:ecommerce/features/shop/models/category_models.dart';
 import 'package:ecommerce/features/shop/screens/sub_category/sub_category.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +53,12 @@ class UHomeCategories extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  final category = categories[index];
+                  CategoryModel category = categories[index];
                   return UVerticalImageText(
                     title: category.name,
                     image: category.image,
-
                     textColor: UColors.white,
-                    onTap: () => Get.to(() => SubCategoryScreen()),
+                    onTap: () => Get.to(() => SubCategoryScreen(category: category)),
                   );
                 },
               ),

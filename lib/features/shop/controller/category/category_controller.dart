@@ -48,8 +48,19 @@ class CategoryController extends GetxController {
 
       return products;
     } catch(e){
-      USnackBarHelpers.errorSnackBar(title: 'Fialed',message: e.toString());
+      USnackBarHelpers.errorSnackBar(title: 'Failed',message: e.toString());
       return [];
+    }
+  }
+
+  /// Get Sub Categories of selected Category
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try{
+      final subCategories = _repository.getSubCategories(categoryId);
+      return subCategories;
+    } catch(e){
+      USnackBarHelpers.errorSnackBar(title: "Failed",message: e.toString());
+      return[];
     }
   }
 }

@@ -5,7 +5,7 @@ class UKeys{
   static const String  productCollection = 'Product';
   static const String  brandCollection = 'Brands';
   static const String  brandCategoryCollection = 'BrandCategory';
-  //static const String  productCategoryCollection = 'BrandCategory';
+  static const String  addressCollection = ' Addresses';
   static const String  categoryFolder = 'Category Pictures';
   static const String productCategoryCollection = 'ProductCategory';
   static const String  bannersCollection = 'Banners';

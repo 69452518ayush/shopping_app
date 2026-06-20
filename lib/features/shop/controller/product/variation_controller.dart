@@ -88,4 +88,11 @@ class VariationController extends GetxController {
         ? 'In Stock '
         : ' Out of Stock';
   }
+  /// Reset Selected Attributes when switching products
+  void resetSelectedAttributes() {
+    selectedAttributes.clear();
+    variationStockStatus.value = '';
+    selectedVariation.value = ProductVariationModel.empty();
+  }
+
 }

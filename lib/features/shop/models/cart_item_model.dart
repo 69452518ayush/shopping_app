@@ -1,6 +1,4 @@
-
-
-class CartItemModel{
+class CartItemModel {
   String productId;
   String title;
   double price;
@@ -24,10 +22,10 @@ class CartItemModel{
   /// Empty Cart
   static CartItemModel empty() => CartItemModel(productId: '', quantity: 0);
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
       'productId': productId,
-      'title' : title,
+      'title': title,
       'price': price,
       'image': image,
       'quantity': quantity,
@@ -37,7 +35,7 @@ class CartItemModel{
     };
   }
 
-  factory CartItemModel.fromJson(Map<String, dynamic> json){
+  factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
       productId: json['productId'],
       title: json['title'],
@@ -46,8 +44,9 @@ class CartItemModel{
       quantity: json['quantity'],
       variationId: json['variationId'],
       brandName: json['brandName'],
-      selectedVariation: json['selectedVariation'] != null ? Map<String, dynamic>.from(json['selectedVariation']) : null,
-
+      selectedVariation: json['selectedVariation'] != null
+          ? Map<String, dynamic>.from(json['selectedVariation'])
+          : null,
     );
   }
 }
